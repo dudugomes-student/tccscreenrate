@@ -1,0 +1,263 @@
+.scene {
+  position: relative;
+  min-block-size: 100svh;
+  overflow: clip;
+  background: var(--color-ink);
+}
+
+.stickyFrame {
+  position: relative;
+  display: grid;
+  min-block-size: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.backdrop,
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.backdrop {
+  z-index: -3;
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 28%), transparent 30%, rgb(0 0 0 / 18%) 68%, var(--color-ink)),
+    radial-gradient(circle at 50% 46%, #242026 0, #0b0a0c 36%, #050505 72%);
+}
+
+.glowLeft,
+.glowRight {
+  position: absolute;
+  inline-size: 42vw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.24;
+}
+
+.glowLeft {
+  inset-block-start: 16%;
+  inset-inline-start: -22%;
+  background: var(--color-brand-deep);
+}
+
+.glowRight {
+  inset-block-start: 4%;
+  inset-inline-end: -26%;
+  background: #704028;
+  opacity: 0.12;
+}
+
+.vignette {
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 72%), transparent 25% 75%, rgb(0 0 0 / 72%)),
+    radial-gradient(circle, transparent 42%, rgb(0 0 0 / 60%) 100%);
+}
+
+.posterStage {
+  position: absolute;
+  inset: var(--header-height) 0 0;
+  z-index: -1;
+  perspective: 75rem;
+  perspective-origin: 50% 43%;
+  transform-style: preserve-3d;
+}
+
+.content {
+  align-self: center;
+  justify-self: center;
+  display: grid;
+  justify-items: center;
+  gap: 1.35rem;
+  inline-size: min(100% - 3rem, 76rem);
+  padding-block-start: var(--header-height);
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--color-paper-muted);
+  font-size: clamp(0.64rem, 0.9vw, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.eyebrow span {
+  inline-size: 1.8rem;
+  block-size: 1px;
+  background: var(--color-brand-bright);
+}
+
+.title {
+  display: grid;
+  font-family: var(--font-display);
+  font-size: clamp(4.1rem, 10.5vw, 10rem);
+  font-weight: 900;
+  line-height: 0.72;
+  letter-spacing: -0.075em;
+  text-transform: uppercase;
+  text-shadow: 0 0.2rem 2.4rem rgb(0 0 0 / 45%);
+}
+
+.title span {
+  display: block;
+}
+
+.title span:nth-child(2) {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(245 241 235 / 64%);
+}
+
+.title span:last-child {
+  color: var(--color-brand-bright);
+}
+
+.brandStatement {
+  display: grid;
+  gap: 0.25rem;
+  color: var(--color-paper-muted);
+  font-size: clamp(0.7rem, 1vw, 0.86rem);
+}
+
+.brandStatement strong {
+  color: var(--color-paper);
+  font-size: clamp(0.88rem, 1.3vw, 1.1rem);
+  font-weight: 620;
+}
+
+.brandStatement strong span {
+  color: var(--color-brand-bright);
+}
+
+.sceneMeta {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: clamp(1.25rem, 3vw, 3rem);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: rgb(245 241 235 / 44%);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transform: translateX(-50%) rotate(-90deg);
+}
+
+.metaLine {
+  inline-size: 2.2rem;
+  block-size: 1px;
+  background: rgb(245 241 235 / 25%);
+}
+
+.scrollCue {
+  position: absolute;
+  inset-block-end: 1.5rem;
+  inset-inline-start: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 0.7rem;
+  color: rgb(245 241 235 / 48%);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  translate: -50% 0;
+}
+
+.scrollCue i {
+  position: relative;
+  inline-size: 1px;
+  block-size: 2.2rem;
+  overflow: hidden;
+  background: rgb(255 255 255 / 18%);
+}
+
+.scrollCue i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-paper);
+  animation: scroll-line 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-line {
+  0% { translate: 0 -100%; }
+  50%, 100% { translate: 0 100%; }
+}
+
+@media (max-width: 48rem) {
+  .scene {
+    min-block-size: 160svh;
+  }
+
+  .stickyFrame {
+    position: sticky;
+    inset-block-start: 0;
+  }
+
+  .posterStage {
+    inset-block-start: var(--header-height);
+    perspective: 50rem;
+  }
+
+  .content {
+    align-self: start;
+    gap: 1rem;
+    inline-size: min(100% - 2rem, 32rem);
+    padding-block-start: clamp(9rem, 21svh, 11rem);
+  }
+
+  .title {
+    font-size: clamp(3.8rem, 19vw, 6.2rem);
+    line-height: 0.78;
+  }
+
+  .brandStatement {
+    max-inline-size: 18rem;
+  }
+
+  .sceneMeta {
+    display: none;
+  }
+
+  .scrollCue {
+    inset-block-end: 1rem;
+  }
+
+}
+
+@media (max-height: 42rem) and (min-width: 48.01rem) {
+  .content {
+    gap: 0.75rem;
+  }
+
+  .title {
+    font-size: clamp(3.5rem, 10vw, 6rem);
+  }
+
+  .brandStatement,
+  .sceneMeta {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene {
+    min-block-size: 100svh;
+  }
+
+  .stickyFrame {
+    position: relative;
+  }
+
+  .scrollCue i::after {
+    animation: none;
+    translate: 0;
+  }
+}

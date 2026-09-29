@@ -1,0 +1,306 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: var(--layer-header);
+  border-block-end: 1px solid transparent;
+  background: linear-gradient(180deg, rgb(7 7 7 / 76%), transparent);
+  transition: border-color 240ms ease, background-color 240ms ease, backdrop-filter 240ms ease;
+}
+
+.header[data-scrolled="true"] {
+  border-color: var(--color-line);
+  background: rgb(7 7 7 / 78%);
+  backdrop-filter: blur(18px) saturate(120%);
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  inline-size: min(100% - 3rem, var(--container));
+  min-block-size: var(--header-height);
+  margin-inline: auto;
+}
+
+.logoLink {
+  position: relative;
+  z-index: 2;
+}
+
+.navigationShell {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 5rem);
+}
+
+.navigation,
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.navigation {
+  gap: clamp(1.25rem, 2.5vw, 2.6rem);
+}
+
+.actions {
+  gap: 0.75rem;
+}
+
+.navigation a,
+.searchToggle,
+.signIn {
+  border: 0;
+  background: transparent;
+  color: var(--color-paper-muted);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 160ms ease;
+}
+
+.navigation a,
+.signIn {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+}
+
+.navigation a:hover,
+.searchToggle:hover,
+.signIn:hover {
+  color: var(--color-paper);
+}
+
+.searchToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-block-size: 2.75rem;
+  padding-inline: 0.45rem;
+  cursor: pointer;
+}
+
+.signUp {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  padding-inline: 1.15rem;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 6%);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.signUp:hover {
+  border-color: rgb(255 255 255 / 48%);
+  background: rgb(255 255 255 / 11%);
+}
+
+.searchPanel {
+  position: absolute;
+  inset-block-start: calc(100% + 0.5rem);
+  inset-inline-end: 0;
+  inline-size: min(32rem, calc(100vw - 3rem));
+  padding: 1rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: rgb(15 15 17 / 96%);
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 45%);
+  opacity: 0;
+  pointer-events: none;
+  translate: 0 -0.5rem;
+  transition: opacity 180ms ease, translate 180ms var(--ease-out);
+}
+
+.searchPanelOpen {
+  opacity: 1;
+  pointer-events: auto;
+  translate: 0;
+}
+
+.searchPanel > label {
+  display: block;
+  margin-block-end: 0.6rem;
+  color: var(--color-paper-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.searchField {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.7rem;
+  min-block-size: 3.25rem;
+  padding-inline-start: 0.85rem;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: var(--radius-sm);
+  background: rgb(255 255 255 / 5%);
+}
+
+.searchField input {
+  min-inline-size: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--color-paper);
+}
+
+.searchField button {
+  align-self: stretch;
+  padding-inline: 1rem;
+  border: 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--color-brand);
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.searchStatus {
+  min-block-size: 1.1rem;
+  margin-block-start: 0.55rem;
+  color: var(--color-paper-muted);
+  font-size: 0.75rem;
+}
+
+.menuButton {
+  display: none;
+}
+
+@media (max-width: 68rem) {
+  .navigationShell {
+    gap: 1.5rem;
+  }
+
+  .navigation {
+    gap: 1rem;
+  }
+
+  .searchToggle span,
+  .signIn {
+    display: none;
+  }
+}
+
+@media (max-width: 48rem) {
+  .inner {
+    inline-size: min(100% - 2rem, var(--container));
+  }
+
+  .menuButton {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+    background: rgb(255 255 255 / 5%);
+    cursor: pointer;
+  }
+
+  .menuIcon {
+    position: relative;
+    inline-size: 1.05rem;
+    block-size: 0.75rem;
+  }
+
+  .menuIcon span {
+    position: absolute;
+    inset-inline: 0;
+    block-size: 1px;
+    background: currentColor;
+    transition: rotate 180ms ease, translate 180ms ease;
+  }
+
+  .menuIcon span:first-child { inset-block-start: 0.15rem; }
+  .menuIcon span:last-child { inset-block-end: 0.15rem; }
+  .menuIconOpen span:first-child { translate: 0 0.22rem; rotate: 45deg; }
+  .menuIconOpen span:last-child { translate: 0 -0.22rem; rotate: -45deg; }
+
+  .navigationShell {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2rem;
+    padding: calc(var(--header-height) + 2rem) 1.5rem 2rem;
+    background: rgb(7 7 7 / 98%);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    translate: 0 -1rem;
+    transition: opacity 180ms ease, translate 240ms var(--ease-out), visibility 0s 240ms;
+  }
+
+  .navigationOpen {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    translate: 0;
+    transition-delay: 0s;
+  }
+
+  .navigation {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .navigation a {
+    min-block-size: 3.8rem;
+    border-block-end: 1px solid var(--color-line);
+    color: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 7vw, 2rem);
+    letter-spacing: -0.02em;
+    text-transform: none;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .searchToggle {
+    justify-content: center;
+    grid-column: 1 / -1;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+  }
+
+  .searchToggle span,
+  .signIn {
+    display: inline-flex;
+  }
+
+  .signIn,
+  .signUp {
+    justify-content: center;
+  }
+
+  .searchPanel {
+    position: static;
+    display: none;
+    inline-size: 100%;
+    opacity: 1;
+    translate: 0;
+  }
+
+  .searchPanelOpen {
+    display: block;
+  }
+}

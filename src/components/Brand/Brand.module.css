@@ -1,0 +1,53 @@
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-block-size: 2.75rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+.mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 24%);
+  border-radius: 50%;
+  background: var(--color-brand);
+  box-shadow: 0 0 2rem rgb(197 31 44 / 20%);
+}
+
+.mark::before,
+.mark::after {
+  content: "";
+  position: absolute;
+  inline-size: 115%;
+  block-size: 1px;
+  background: rgb(255 255 255 / 55%);
+  rotate: -32deg;
+}
+
+.mark::after {
+  rotate: 32deg;
+}
+
+.mark span {
+  position: absolute;
+  inline-size: 0.2rem;
+  block-size: 0.2rem;
+  border-radius: 50%;
+  background: white;
+}
+
+.mark span:first-child { translate: -0.58rem -0.45rem; }
+.mark span:nth-child(2) { translate: 0.62rem -0.38rem; }
+.mark span:last-child { translate: 0 0.65rem; }
+
+.wordmark span {
+  color: var(--color-brand-bright);
+}

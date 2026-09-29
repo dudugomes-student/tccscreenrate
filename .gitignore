@@ -1,0 +1,7 @@
+node_modules
+dist
+.vite
+.npm-cache
+*.log
+.qa-browser
+qa/*.png
